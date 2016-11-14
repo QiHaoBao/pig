@@ -1,0 +1,328 @@
+@(serviceLog: ServiceExecutionLog, comments: List[Comment], replyRes: List[List[Reply]], userId: Long)
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+	href='@routes.Assets.at("stylesheets/bootstrap.css")'>
+<link rel="stylesheet"
+	href='@routes.Assets.at("stylesheets/bootstrap.min.css")'>
+<link rel="shortcut icon" type="image/png"
+	href='@routes.Assets.at("images/favicon.png")'>
+<link rel="stylesheet"
+	href='@routes.Assets.at("stylesheets/bootstrap-editable.css")'>
+<link href='@routes.Assets.at("stylesheets/style.css")'
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/detail.css")'>
+
+<script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-1.11.3.min.js")'></script>
+<script type="text/javascript" src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
+<script type="text/javascript" src='@routes.Assets.at("javascripts/parameter.js")'></script>
+<script type='text/javascript' src='@routes.Assets.at("javascripts/lastLoader.js")'></script>
+<script type='text/javascript' src='@routes.Assets.at("javascripts/jquery.metadata.js")'></script>
+<script type='text/javascript' src='@routes.Assets.at("javascripts/jquery.tablesorter.js")'></script>
+<script type='text/javascript' src='@routes.Assets.at("javascripts/bootstrap-editable.min.js")'></script>
+<script type="text/javascript" src='@routes.Assets.at("javascripts/forum.js")'></script>
+<script type="text/javascript" src='@routes.Assets.at("javascripts/starrsl.js")'></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
+<!-- Header -->
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid ">
+			<div class="navbar-header" style="margin-left:-15px">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" style="padding-bottom: 0;" href="/">
+					<div>
+					<a href="http://www.jpl.nasa.gov/"><img src='@routes.Assets.at("images/NASA_JPL_logo.png")' style="height: 24px; width: 144px;"></a>
+					<a href="http://www.cmu.edu/"><img src='@routes.Assets.at("images/logo.png")' style="height: 12px; width: 160px;"></a>
+					</div>
+				</a>
+			</div>
+			 <div class="navbar-collapse collapse" style="height:">
+                                <ul class="nav navbar-nav navbar-right">
+				                            <li><a href="@routes.Application.home()">Home</a></li>
+																				<li class="dropdown">
+																								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Student Projects<b class="caret"></b></a>
+																								<ul class="dropdown-menu">
+																												<li><a href="@routes.StudentTopicController.studentTopic1()">Topic #1</a></li>
+																												<li><a href="@routes.StudentTopicController.studentTopic2()">Topic #2</a></li>
+																												<li><a href="@routes.StudentTopicController.studentTopic3()">Topic #3</a></li>
+																												<li><a href="@routes.StudentTopicController.studentTopic4()">Topic #4</a></li>
+																												<li><a href="@routes.StudentTopicController.studentTopic5()">Topic #5</a></li>
+																												<li><a href="@routes.StudentTopicController.studentTopic6()">Topic #6</a></li>
+																								</ul>
+																				</li>
+
+
+																				<li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Use Cases<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseOverview()">Overview</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample1()">Example 1</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample2()">Example 2</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample3()">Example 3</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample4()">Example 4</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample5()">Example 5</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample6()">Example 6</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample7()">Example 7</a></li>
+                                                        <li><a href="@routes.ScienceUseCaseController.scienceUseCaseExample8()">Example 8</a></li>
+                                                </ul>
+                                        </li>
+
+
+                                        @if(true) {
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recommendation<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo", 1, "climate")'>Summary</a></li>
+                                                </ul>
+                                        </li>
+                                        }
+
+                                        @if(true) {
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Workflow<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="@routes.WorkflowController.getPublicWorkflow">Workflow List</a></li>
+                                                        <li><a href="@routes.WorkflowController.generateWorkflow">Workflow Mining</a></li>
+                                                        @if(true) {
+                                                                <li><a href="@routes.WorkflowController.main">Register Workflow</a></li>
+                                                        }
+                                                </ul>
+                                        </li>
+                                        }
+
+																				@if(session.get("email")) {
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analytics<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="@routes.ClimateServiceController.showAllClimateServices()">Service List</a></li>
+                                                        <li><a href="@routes.ClimateServiceController.mostRecentlyUsedClimateServices">Most Recently Used</a></li>
+
+                                                        @if(session.get("level")=="admin") {
+                                                                <li><a href="@routes.ClimateServiceController.addAClimateService()">Register Service</a></li>
+                                                        }
+                                                        @if(true) {
+                                                        <li><a href="@routes.ClimateServiceController.searchClimateServices()">Search Service</a></li>
+                                                	}
+                                                </ul>
+                                        </li>
+																			  }
+
+																				@if(session.get("email")) {
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        @if(true) {
+                                                        <li><a href="@routes.DatasetController.mostPopularDatasets()">Most Popular</a></li>
+                                                        }
+                                                        <li><a href="@routes.DatasetController.showAllDatasets()">Dataset List</a></li>
+																												<li><a href="@routes.DatasetController.addADataset()">Register Dataset</a></li>
+                                                        <li><a href="@routes.DatasetController.searchDataset()">Search Dataset</a></li>
+                                                </ul>
+                                        </li>
+																			  }
+
+																				@if(session.get("email")) {
+																				<li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collaboration<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="@routes.ServiceExecutionLogController.getServiceLog(1)">Service Execution Log</a></li>
+                                                        <li><a href="@routes.ServiceExecutionLogController.searchServiceLog">Search Service Log</a></li>
+																												<li><a href="@routes.AnalyticsController.getKnowledgeGraph()">Knowledge Graph</a></li>
+
+                                                        <li><a href="">Dataset Log</a></li>
+
+                                                        <li><a href="">Relational Knowledge Graph</a></li>
+                                                        <li><a href="">Semantic Dataset Analytics</a></li>
+                                                        <li><a href="">User Analytics</a></li>
+                                                        <li><a href="">Service Execution Log Analytics</a></li>
+                                                        <li><a href="@routes.BugReportController.reports">Bug Report</a></li>
+                                                        <li><a href="@routes.BugReportController.list">Bug List</a></li>
+                                                </ul>
+                                        </li>
+																			  }
+
+                                        @if(true) {
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Scientist<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="@routes.UsersController.getAllUsers()">All Users</a></li>
+                                                        <li><a href="@routes.UsersController.searchUser()">Search User</a></li>
+                                                        @if(true) {
+                                                        <li><a href="@routes.UsersController.getActiveUsers()">Most Active Users</a></li>
+                                                        }
+                                                </ul>
+                                        </li>
+                                        }
+
+
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+
+                                                        <li><a href="@routes.AboutController.aboutUs()">About Us</a></li>
+                                                        <li><a href="@routes.AboutController.aboutProject()">About project</a></li>
+
+                                                        <li><a href="@routes.AboutController.FAQs()">FRQs</a></li>
+                                                        <li><a href="@routes.AboutController.tutorial()">Tutorial</a></li>
+                                                </ul>
+                                        </li>
+
+                                        @if(!session.get("email")) {
+                                                <form class="navbar-form navbar-right" action="@routes.Application.login()">
+                                                        <button type="submit" class="btn btn-success">Log in</button>
+                                                </form>
+                                        } else {
+                                                @if(true) {
+                                                <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Space<b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                                <li><a href="@routes.ClimateServiceController.showMyClimateServices()">My climate services</a></li>
+                                                                <li><a href="@routes.DatasetController.showMyDatasets()">My datasets</a></li>
+                                                                <li><a href="@routes.ServiceExecutionLogController.getMyLogs()">My service logs</a></li>
+                                                        </ul>
+                                                </li>
+                                                }
+
+                                                <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@session.get("email")<b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                                <li><a href="@routes.Application.logout()">Log out</a></li>
+                                                        </ul>
+                                                </li>
+                                        }
+
+                                        @if(true) {
+                                                <form class="navbar-form navbar-right" action="#">
+                                                        <button type="submit" class="btn btn-success">Admin Console</button>
+                                                </form>
+                                        }
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</head>
+
+<body>
+<br><br><br><br><br><br>
+<iframe src="@serviceLog.getUrl&userid=@userId" id="Iframe" style="width:100%;height:100%;border:none;"></iframe>
+	<div align="center" class="row">
+		<div class="rating_self clearfix" typeof="v:Rating">
+            <div class="rating_right">
+            	<strong class="ll rating_num">@serviceLog.getRate</strong>
+                <div id="hearts" data-userid="@userId" data-selid="@serviceLog.getId"
+                class="starrs"></div>
+			   	You gave a rating of <span id="count">0</span> star(s)
+                <div class="rating_sum">
+                    <span class="rating_sum">@serviceLog.getNumber</span> user(s) rated
+                </div>
+            </div>
+       	</div>
+	</div>
+	<div class="well">
+        <div class="row">
+             <h3>Comments:</h3>
+             <ul class="list-group list-view">
+             @for( i <- 0 until comments.size) {
+                 <table class="table">
+                 	<tbody>
+                 		<tr>
+            				<td>
+               					<div class="vote">
+                                	<a href="javascript:void(0)" data-act="voteup" data-commentId="@comments(i).getId" data-wfid="@serviceLog.getId" class="vote-thumb vote-up-off"></a>
+                                	<p class="vote-num">@comments(i).getThumb</p>
+                                	<a href="javascript:void(0)" data-act="votedown" data-commentId="@comments(i).getId" data-wfid="@serviceLog.getId" class="vote-thumb vote-down-off"></a>
+                            	</div>
+            				</td>
+            				<td class="postcell">
+                        		<h4><span class="red">&#35; @(i + 1)</span> &#64; @(comments(i).getUserName) <small class="right">@(new Date(comments(i).getTimestamp).toString)</small></h4>
+                        		<div class="row">
+                            		<div class="col-md-10">
+                                		<p>@comments(i).getContent</p>
+                            		</div>
+                        		</div>
+                    			<form class="form" action="@routes.ServiceExecutionLogController.addReply(comments(i).getUser, comments(i).getId, serviceLog.getId)" enctype="multipart/form-data" method="POST">
+                        			<a href="javascript:void(0)" class="toggle">Reply</a>
+                        			<div class="ninja hide-hood">
+                            			<input class="form-control input-sm" type="text" name="content">
+                            			<button class="btn-xs btn-primary mt-btn" type="submit">Submit</button>
+                        			</div>
+                    			</form>
+                    			<ul class="list-group list-view">
+                        			@for( j <- 0 until replyRes.get(i).size) {
+                            		<li class="list-group-item list-view">
+                                		<h5>@(replyRes.get(i).get(j).getFromUserName)<span class="shy"> &rarr; @(replyRes.get(i).get(j).getToUserName)</span>
+                                			<small class="right">@(new Date(replyRes.get(i).get(j).getTimestamp).toString)</small>
+                                		</h5>
+                                		<p>@("\t" + replyRes.get(i).get(j).getContent)</p>
+                                		<form class="form" action="@routes.ServiceExecutionLogController.addReply(replyRes.get(i).get(j).getFromUserId, comments(i).getId, serviceLog.getId)" enctype="multipart/form-data" method="POST">
+                                    		<a href="javascript:void(0)" class="toggle">Reply</a>
+                                    		<div class="ninja hide-hood">
+                                        		<input class="form-control input-sm" type="text" name="content">
+                                        		<button class="btn-xs btn-primary mt-btn" type="submit">Submit</button>
+                                    		</div>
+                                		</form>
+                            		</li>
+                        			}
+                        		</ul>
+                        	</td>
+            			</tr>
+    				</tbody>
+    			</table>
+              	}
+            </ul>
+        </div>
+
+		<div class="row">
+            <form class="form" role="form" action="@routes.ServiceExecutionLogController.addComment(serviceLog.getId)"
+                enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" name="content"></textarea>
+                    <button type="submit" class="btn btn-primary mt-btn" >Comment</button>
+                </div>
+            </form>
+        </div>
+			</div>
+</body>
+
+<script type="text/javascript">
+serviceLocation = "ec2-52-53-238-225.us-west-1.compute.amazonaws.com";
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+//for summer2016 only
+	window.onload = function() {
+		// document.getElementById("Iframe").src = "http://einstein.sv.cmu.edu:8180/assets/html/twoDimMap.html";
+		attr0 = $("#Iframe").attr("src");
+		console.log("00 " + attr0);
+		attr0 = attr0.replaceAll("einstein.sv.cmu.edu", serviceLocation);
+		//attr0 = attr0.replaceAll(window.location.hostname, "ec2-54-183-11-107.us-west-1.compute.amazonaws.com");
+		console.log("11 " + attr0);
+		//attr0 = attr0.replaceAll("ec2-54-153-54-217.us-west-1.compute.amazonaws.com", "ec2-54-183-11-107.us-west-1.compute.amazonaws.com");
+		attr0 = attr0.replace("ec2-52-53-238-225.us-west-1.compute.amazonaws.com:9034/assets/picture/", "einstein.sv.cmu.edu:9034/assets/picture/");
+		console.log("22 " + attr0);
+		document.getElementById("Iframe").src = attr0; // This is right
+		// $("#Iframe").attr("src", window.location.hostname);
+		console.log("33"+ $("#Iframe").attr("src")); //now it prints right URL localhost:8080/assets/html/twoDimSlice3D.html
+}
+
+</script>
+
+</html>
